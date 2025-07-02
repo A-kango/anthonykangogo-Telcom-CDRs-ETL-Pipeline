@@ -1,0 +1,84 @@
+#telcom_data_etl_pipeline
+#Extract data from mysql
+def extract_data():
+     import pandas as pd
+     from sqlalchemy import create_engine
+     engine = create_engine("mysql+mysqlconnector://root:Anthony8700,@localhost:3306/telcom_call_logs_data")
+     df=pd.read_sql('SELECT*FROM call_logs',con=engine)
+     return df
+
+#transform data with pandas
+def transform_data(df):
+    ds=df.set_index('caller_number')
+    Sorted_dataset=ds.sort_values(by="caller_location",ascending=True)
+    db=Sorted_dataset.drop_duplicates()
+    dy=db.fillna(0)
+    return dy
+
+#load data into postgress data warehouse
+def load_data(dy):
+    import pandas as pd
+    from sqlalchemy import create_engine
+    pg_engine = create_engine("postgresql://postgres:Anthony8700@localhost:5432/telcom_data_warehouse")
+    dy.to_sql("call_logs", con=pg_engine, if_exists="replace", index=False)
+    print("Data loaded successfully into PostgreSQL.")
+    
+#recalling the ETL procedures
+def run_etl():
+    df=extract_data()
+    dy=transform_data(df)
+    load_data(dy)
+    print("ETL process completed.")
+
+run_etl()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

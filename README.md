@@ -32,5 +32,32 @@ Power BI (Dashboards & Analysis)
 - PostgreSQL
 - Power BI
 
-## 📂 Project Structure
+
+## 🚀 How to Run the Script
+
+1. Ensure MySQL and PostgreSQL servers are running
+2. Update the credentials in `etl_script.py` if needed
+3. Run the ETL script using:
+
+
+Expected Output:
+
+Data loaded successfully into PostgreSQL.
+ETL process completed.
+
+## 🧱 Example PostgreSQL Schema
+
+```sql
+CREATE TABLE call_logs (
+    caller_number VARCHAR,
+    receiver_number VARCHAR,
+    call_duration INT,
+    call_time TIMESTAMP,
+    caller_location VARCHAR,
+    receiver_location VARCHAR
+);
+
+👤 Author
+Engineer Anthony Kangogo
+GitHub Profile
 

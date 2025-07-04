@@ -3,7 +3,7 @@
 def extract_data():
      import pandas as pd
      from sqlalchemy import create_engine
-     engine = create_engine("mysql+mysqlconnector://root:Anthony8700,@localhost:3306/telcom_call_logs_data")
+     engine = create_engine("mysql+mysqlconnector://root:Anthony8700localhost:3306/telcom_call_logs_data")
      df=pd.read_sql('SELECT*FROM call_logs',con=engine)
      return df
 
@@ -19,7 +19,7 @@ def transform_data(df):
 def load_data(dy):
     import pandas as pd
     from sqlalchemy import create_engine
-    pg_engine = create_engine("postgresql://postgres:Anthony8700@localhost:5432/telcom_data_warehouse")
+    pg_engine = create_engine("postgresql://postgres:Anthony8734@localhost:5432/telcom_data_warehouse")
     dy.to_sql("call_logs", con=pg_engine, if_exists="replace", index=False)
     print("Data loaded successfully into PostgreSQL.")
     
